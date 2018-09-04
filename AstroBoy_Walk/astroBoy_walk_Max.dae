@@ -13205,7 +13205,7 @@ See license file or www.creativecommons.org for details.
   </library_lights>
   <library_images>
     <image id="boy_10.tga" name="boy_10_tga">
-      <init_from>file:///Users/ligaofeng/GitProject/collada/AstroBoy_Walk/boy_10.tga</init_from>
+      <init_from>file://E:\GitProject\MyCollada\AstroBoy_Walk/boy_10.tga</init_from>
     </image>
   </library_images>
   <library_materials>
