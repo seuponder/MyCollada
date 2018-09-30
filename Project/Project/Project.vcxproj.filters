@@ -36,6 +36,9 @@
     <ClInclude Include="DaeLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ColladaUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColladaRender.cpp">
@@ -45,6 +48,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CTriangleData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColladaUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CGeometryData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkeletonDatacpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

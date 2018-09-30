@@ -123,12 +123,16 @@
     <ClInclude Include="CGeometryData.h" />
     <ClInclude Include="ColladaDefine.h" />
     <ClInclude Include="ColladaRender.h" />
+    <ClInclude Include="ColladaUtil.h" />
     <ClInclude Include="CSkeletonData.h" />
     <ClInclude Include="CTriangleData.h" />
     <ClInclude Include="DaeLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CGeometryData.cpp" />
     <ClCompile Include="ColladaRender.cpp" />
+    <ClCompile Include="ColladaUtil.cpp" />
+    <ClCompile Include="CSkeletonDatacpp.cpp" />
     <ClCompile Include="CTriangleData.cpp" />
     <ClCompile Include="DaeLoader.cpp" />
   </ItemGroup>

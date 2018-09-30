@@ -19,9 +19,10 @@ public:
 	float m_Emmision[4] = { 0.0f, 0.0f, 0.0f, 1.0f };	// 自发光
 	float m_Shine = { 45.0 };			// 看起来是hdr里面的光滑度
 	float m_Transparency = { 1.0 };
-	std::string	m_TextureFileName;
-	std::string m_MaterialID;		// todo 这个东西还不知道具体表现是那个字段
+	std::string	m_TextureFileName;		// 这个是
+	std::string m_MaterialID;		// material id 会对应到 instance_effect 上
 
+	void init_from_material_id(std::string material_id, ColladaRender& render, daeDocument* doc);
 };
 
 /*
@@ -35,6 +36,11 @@ enum  TriangleSemantic
 };
 
 
+/*
+ * 因为是只认为有一组原始顶点，法线，纹理， 所以这边
+ * 没有管这个索引对应的是哪一个mesh 了，多个mesh 这边应该是
+ * 需要有对应id 来和这个挂钩的
+ */
 class CTriangle
 {
 public:
@@ -55,13 +61,13 @@ private:
 class CTriangleGroup
 {
 public:
-	CTriangleGroup(void);
+	CTriangleGroup(void)=default;
 	~CTriangleGroup(void);
 	void init_from_element(daeElementRef element, ColladaRender& render);
 
 private:
-	CTriangle		*m_Triangles;
-	CMaterial		*m_Material;
+	CTriangle		*m_Triangles = { nullptr };
+	CMaterial		*m_Material = { nullptr };
 	unsigned int	m_NoOfTriangles;
 };
 

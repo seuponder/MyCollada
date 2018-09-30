@@ -5,6 +5,14 @@
 
 NS_C_DRAW_BEGIN
 
+/*
+ * library_animation 的dae文件数据结构
+ *					channel
+ *					   |
+ *				/             \
+ *			sampler			 target[bone]
+ *					 
+ */
 class CKeyframe{
 public:
 	CKeyframe(void);
@@ -18,6 +26,7 @@ private:
 
 /*
  *  单根骨骼数据
+ *  就是joint 关节的数据， 并不是真的是两个关节之间的骨骼，只是为了命名方便
  */
 class CBone{
 public:
@@ -40,18 +49,21 @@ private:
 
 /*
  * 骨架数据
+ * scene--->library_visual_scenes
  */
 class CSkeletonData{
 public:
 	CSkeletonData(void);
 	~CSkeletonData(void);
 
-private:
-	unsigned int  m_NoOfBones;
-	unsigned int  m_NoOfKeyframes;
-	CMatrix4f     *m_BindShapeMatrix;
+	void initWithElement();
 
-	CBone         **m_Bones;
-	CBone         *m_RootBone;
+private:
+	unsigned int  m_NoOfBones={0};
+	unsigned int  m_NoOfKeyframes={0};		// 这个关键帧的数量咋搞， 每个CBone 可能存在的关键帧是不一样的
+	CMatrix4f     *m_BindShapeMatrix={nullptr};
+
+	CBone         **m_Bones={nullptr};
+	CBone         *m_RootBone={nullptr};
 };
 NS_C_DRAW_END

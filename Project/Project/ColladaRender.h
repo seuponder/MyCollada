@@ -9,6 +9,7 @@
 #include "CGeometryData.h"
 #include "CTriangleData.h"
 #include "CSkeletonData.h"
+#include "CTriangleData.h"
 
 NS_C_DRAW_BEGIN
 
@@ -23,7 +24,9 @@ public:
 	bool Update(unsigned long mili_seconds);
 	void SetupSkeleton(int frame);
 	void SetupBindPose();
+	
 	void loadDae(std::string file_name);		// 加载数据填充需要渲染的成员扫数据
+	void initSkeletonDataFromElement(daeElementRef controller, daeElement* bone_root, daeDocument* doc);			// 加载skeleton 数据
 
 protected:
 	void CalculateBound();
@@ -31,8 +34,8 @@ protected:
 
 private:
 	
-	CGeometryData	*m_geometry_data;	// Common data in the mesh (List of Vertices/Normals/TexCoords)
-	CSkeletonData	*m_skeleton_data;	// Skelleton Data used for animation
+	CGeometryData	*m_geometry_data={nullptr};	// Common data in the mesh (List of Vertices/Normals/TexCoords)
+	CSkeletonData	*m_skeleton_data={nullptr};	// Skelleton Data used for animation
 	std::vector<CTriangleGroup>	m_triangle_groups;	// Individual Triangle Grtoups Sepatated By material Data
 };
 

@@ -18,6 +18,8 @@ public:
 
 	void loadTriangleGroup(ColladaRender& render, daeElementRef element);
 
+	void loadSkelletonData(ColladaRender& render, daeDocument* doc);
+
 };
 NS_C_DRAW_END
 

@@ -30,3 +30,6 @@ typedef float CMatrix4f[16];
 #else
 #define USING_DOM_NS using namespace ColladaDOM150;
 #endif
+
+
+#define  DAE_NULL 0
