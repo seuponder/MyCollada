@@ -24,7 +24,7 @@ typedef float CMatrix4f[16];
 	delete []ptr;\
 	ptr = nullptr;\
 	}
-
+ 
 #ifdef COLLADA_DOM_SUPPORT141
 #define USING_DOM_NS using namespace ColladaDOM141;
 #else
@@ -33,3 +33,13 @@ typedef float CMatrix4f[16];
 
 
 #define  DAE_NULL 0
+
+/*
+ *  骨骼语意
+ */
+enum  SkeletonSemantic
+{
+	JOINT = 0,  // 骨骼
+	WEIGHT,     // 权重
+	INV_BIND_MATRIX		// 逆向绑定矩阵
+};

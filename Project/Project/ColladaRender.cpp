@@ -40,9 +40,10 @@ void ColladaRender::initSkeletonDataFromElement(daeElementRef controller, daeEle
 	// 初始化 骨骼
 	SAFE_DELETE(m_skeleton_data);
 	m_skeleton_data = new CSkeletonData();
-	m_skeleton_data
+	m_skeleton_data->initWithElement(controller, bone_root, doc);
 
 	// 初始化蒙皮数据
+	m_geometry_data->init_vertexweight_from_element(controller, bone_root, doc);
 
 }
 

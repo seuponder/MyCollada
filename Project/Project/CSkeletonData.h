@@ -2,6 +2,7 @@
 
 #include "ColladaDefine.h"
 #include <vector>
+#include "dae.h"
 
 NS_C_DRAW_BEGIN
 
@@ -33,17 +34,20 @@ public:
 	CBone(void);
 	~CBone(void);
 
+	void initWithElement(daeElementRef controller, daeElement* bone_root, daeDocument* doc, int p_id, CSkeletonData& skeleton);
+	bool isBindValid();
+	int getID(){ return m_ID;};
+
 private:
-	int		m_ID;		// id of this bone
-	int		m_ParentID;		// parent id of this bone
-	CMatrix4f     *m_JointMatrix;				// The Bind Pose Matrix
-	CMatrix4f     *m_InverseBindMatrix;			// The Inverse Bind Pose Matrix
-	CMatrix4f     *m_WorldMatrix;				// The World Matrix
-	CMatrix4f     *m_SkinningMatrix;			// The Matrix Used for calculations
-	unsigned int  m_ChildCount;
-	std::vector<int>   *m_Children;
-	unsigned int  m_NoOfKeyframes;				// No Of key frames of animation for this bone
-	CKeyframe     **m_Keyframes;				// All Key frames for this Bone’s animation
+	int		m_ID=0;		// id of this bone
+	int		m_ParentID=0;		// parent id of this bone
+	CMatrix4f     *m_JointMatrix = {nullptr};				// The model matrix
+	CMatrix4f     *m_InverseBindMatrix = {nullptr};			// The Inverse Bind Pose Matrix
+	CMatrix4f     *m_WorldMatrix = {nullptr};				// The World Matrix, should cal every frame, it is a tmp mat
+	CMatrix4f     *m_SkinningMatrix = {nullptr};			// The Matrix Used for calculations
+
+	std::vector<int>   m_Children;
+	std::vector<CKeyframe*> m_Keyframes;					// all key frames for this Bone's animation
 };
 
 
@@ -56,14 +60,21 @@ public:
 	CSkeletonData(void);
 	~CSkeletonData(void);
 
-	void initWithElement();
+	void initWithElement(daeElementRef controller, daeElement* bone_root, daeDocument* doc);
+	void loadJointInvMats(daeElementRef controller, daeDocument* doc);
+	float* getInvMat(std::string sid);
+
+	size_t getNoOfBones();
+	bool addBone(CBone* bone_ptr);
 
 private:
-	unsigned int  m_NoOfBones={0};
 	unsigned int  m_NoOfKeyframes={0};		// 这个关键帧的数量咋搞， 每个CBone 可能存在的关键帧是不一样的
 	CMatrix4f     *m_BindShapeMatrix={nullptr};
 
-	CBone         **m_Bones={nullptr};
-	CBone         *m_RootBone={nullptr};
+	std::vector<CBone*> m_Bones;
+ 	CBone         *m_RootBone={nullptr};
+	std::hash_map<std::string, float*> m_InvMatMap;
+
+	inline void deleteInvMatMap();
 };
 NS_C_DRAW_END
